@@ -1,3 +1,4 @@
+const { default: axios } = require('axios');
 require('./bootstrap');
 
 import {createApp} from 'vue'

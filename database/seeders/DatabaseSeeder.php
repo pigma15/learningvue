@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Hash;
+use DB;
+use Faker\Factory as Faker;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,6 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $faker = Faker::create('lt_LT');
+
+        foreach(range(1, 25) as $_) {
+            DB::table('architects')->insert([
+                'name' => $faker->firstName(),
+                'surname' => $faker->lastName(),
+            ]);
+        }
     }
 }
