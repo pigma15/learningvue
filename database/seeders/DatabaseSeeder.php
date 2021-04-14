@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             DB::table('architects')->insert([
                 'name' => $faker->firstName(),
                 'surname' => $faker->lastName(),
+                'about' => $faker->text(),
             ]);
         }
     }

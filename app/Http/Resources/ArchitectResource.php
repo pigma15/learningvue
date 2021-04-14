@@ -17,7 +17,8 @@ class ArchitectResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'surname' => $this->surname
+            'surname' => $this->surname,
+            'about' => $this->about,
         ];
     }
 }

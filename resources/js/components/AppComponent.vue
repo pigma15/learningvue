@@ -1,21 +1,16 @@
 <template>
-    <h1>Hello</h1>
-    <div v-for="architect in architects" :key="architect">
-        <ArchitectRow :architect="architect" />
-    </div>
+    <CreateArchitectForm />
 </template>
 
 <script>
-import ArchitectRow from './ArchitectRow.vue'
+import CreateArchitectForm from './templates/CreateArchitectForm.vue'
 
     export default {
         name: "App",
-        components: { ArchitectRow },
+        components: { CreateArchitectForm },
         data() {
             return {
-                name: '',
                 architects: [],
-                loading: true
             }
         },
         mounted() {
@@ -23,8 +18,7 @@ import ArchitectRow from './ArchitectRow.vue'
                 .then(res => {
                     this.architects = res.data.architects;
                     this.loading = false
-
-                }).catch(err => { console.log(err); })
+                }).catch(err => { console.log(err); });
         },
         methods: {
 

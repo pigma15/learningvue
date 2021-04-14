@@ -17,6 +17,7 @@ class CreateArchitectsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
+            $table->text('about');
             $table->timestamps();
         });
     }

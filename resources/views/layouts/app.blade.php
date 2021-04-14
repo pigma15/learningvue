@@ -6,7 +6,12 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet"><style>
+        @font-face {
+            font-family: Lexend-Regular;
+            src: url({{ asset('fonts/Lexend-Regular.ttf') }});
+        }
+    </style>
 </head>
 <body>
     @yield('content')

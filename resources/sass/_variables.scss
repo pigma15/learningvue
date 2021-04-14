@@ -1,0 +1,147 @@
+$background-image: linear-gradient(0.5turn, #3f87a6, #ebf8e1, #f69d3c);
+$form-outside: #ddd8;
+$from-inside: #eee;
+$form-border: #3338;
+$font-color: #333;
+$font-color-light: #8888;
+$font-error: #911;
+$underline-static: #3338;
+$input-background: #eee;
+$input-background-focus: #fff;
+$input-border: #888;
+$input-border-focus: #333;
+$button-background: #fff;
+$button-background-hover: #999;
+$button-font-color-hover: #fff;
+$button-border-color-hover: #fff;
+$button-shadow-color: #aaaa;
+
+@mixin button {
+    display: grid;
+    place-items: center;
+    background: $button-background;
+    font-size: 1.8rem;
+    padding: 0.8rem;
+    color: $font-color;
+    border: 2px solid $form-border;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    box-shadow: 0 1px 0.5rem 0.2rem $button-shadow-color;
+    &:hover {
+        background: $button-background-hover;
+        color: $button-font-color-hover;
+        border: 2px solid $button-border-color-hover;
+        box-shadow: 0 1px 0.8rem 0.8rem $button-shadow-color;
+    }
+    &:focus {
+        border: 2px solid $input-border-focus;
+        outline: none;
+    }
+}
+
+@mixin form {
+    & button.close {
+        @include button;
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 3rem;
+        height: 3rem;
+        font-size: 1.5rem;
+        padding: 0;
+        margin: 0;
+    }
+    display: grid;
+    place-items: center;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    background: $form-outside;
+    & form {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        position: relative;
+        width: 80%;
+        padding: 2rem;
+        background: $from-inside;
+        border: 2px solid $form-border;
+        border-radius: 1rem;
+        & h2 {
+            display: inline-block;
+            grid-column: 1/3;
+            width: 100%;
+            height: 3.6rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        & div.input {
+            display: inline-block;
+            grid-column: auto / span 1;
+            width: 100%;
+            margin: 0.3rem 0;
+            & label, input, span {
+                display: inline-block;
+                width: 90%;
+                margin: 0 5%;
+            }
+            & label {
+                padding: 0.4rem 0;
+                &::after {
+                    content: ' :';
+                }
+            }
+            & input {
+                background: $input-background;
+                height: 3rem;
+                border: 2px solid $input-border;
+                border-radius: 0.4rem;
+                padding-left: 0.4rem;
+                &:focus {
+                    background: $input-background-focus;
+                    border: 2px solid $input-border-focus;
+                    outline: none;
+                }
+                &::placeholder {
+                    color: $font-color-light;
+                    padding-left: 0.4rem;
+                }
+            }
+            & span {
+                color: $font-error;
+                padding: 0.4rem 0.2rem;
+                font-size: 1.4rem;
+            }
+            &.textarea {
+                grid-column: 1/3;
+                & label, textarea, span {
+                    width: 95%;
+                    margin: 0 2.5%;
+                }
+                & textarea {
+                    background: $input-background;
+                    border: 2px solid $input-border;
+                    border-radius: 0.4rem;
+                    padding: 0 0.4rem;
+                    resize: none;
+                    height: 8rem;
+                    &:focus {
+                        background: $input-background-focus;
+                        border: 2px solid $input-border-focus;
+                        outline: none;
+                    }
+                }
+            }
+        }
+        & div.submit {
+            display: grid;
+            place-items: center;
+            grid-column: 1/3;
+            height: 4rem;
+            margin: 1rem 0;
+            & input {
+                @include button;
+                width: 25%;
+            }
+        }
+    }
+}

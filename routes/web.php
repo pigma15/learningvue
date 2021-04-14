@@ -21,4 +21,5 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'architects'], function(){
     Route::post('', [ArchitectController::class, 'index']);
+    Route::post('create', [ArchitectController::class, 'create']);
  });

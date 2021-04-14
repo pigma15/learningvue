@@ -1,0 +1,32 @@
+html {
+    scroll-behavior: smooth;
+    font-size: 10px;
+}
+
+body,
+body * {
+    margin: 0;
+    padding: 0;
+    vertical-align: top;
+    box-sizing: border-box;
+    font-family: Lexend-Regular;
+    font-size: 1.6rem;
+    color: $font-color;
+}
+
+body {
+    background-image: $background-image;
+    background-attachment: fixed;
+    min-height: 200vh; /*  */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    text-decoration: underline 1px $underline-static;
+}
+
+h1 {
+    font-size: 3.6rem;
+}
+h2 {
+    font-size: 3rem;
+}
