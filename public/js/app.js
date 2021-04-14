@@ -16589,7 +16589,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      architects: []
+      architects: [],
+      createArchitectVisible: false
     };
   },
   mounted: function mounted() {
@@ -16602,7 +16603,11 @@ __webpack_require__.r(__webpack_exports__);
       console.log(err);
     });
   },
-  methods: {},
+  methods: {
+    createArchitect: function createArchitect() {
+      this.createArchitectVisible = !this.createArchitectVisible;
+    }
+  },
   computed: {}
 });
 
@@ -16620,15 +16625,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['createArchitectVisible'],
+  data: function data() {
+    return {
+      name: '',
+      surname: '',
+      about: '',
+      nameError: '',
+      surnameError: '',
+      aboutError: ''
+    };
+  },
   methods: {
     createArchitect: function createArchitect(e) {
+      var _this = this;
+
       e.preventDefault();
-      console.log(this.$refs.createArchitect);
-      axios.post('http://localhost/bit/learningvue/public/architects/create').then(function (res) {
-        console.log(res);
+      axios.post('http://localhost/bit/learningvue/public/architects/create', new FormData(this.$refs.createArchitect)).then(function (res) {
+        if (res.data.error) {
+          var _res$data$error$name, _res$data$error$surna, _res$data$error$about;
+
+          _this.nameError = (_res$data$error$name = res.data.error.name) !== null && _res$data$error$name !== void 0 ? _res$data$error$name : '';
+          _this.surnameError = (_res$data$error$surna = res.data.error.surname) !== null && _res$data$error$surna !== void 0 ? _res$data$error$surna : '';
+          _this.aboutError = (_res$data$error$about = res.data.error.about) !== null && _res$data$error$about !== void 0 ? _res$data$error$about : '';
+
+          if (res.data.architect) {
+            var _res$data$architect$n, _res$data$architect$s, _res$data$architect$a;
+
+            _this.name = (_res$data$architect$n = res.data.architect.name) !== null && _res$data$architect$n !== void 0 ? _res$data$architect$n : '';
+            _this.surname = (_res$data$architect$s = res.data.architect.surname) !== null && _res$data$architect$s !== void 0 ? _res$data$architect$s : '';
+            _this.about = (_res$data$architect$a = res.data.architect.about) !== null && _res$data$architect$a !== void 0 ? _res$data$architect$a : '';
+          }
+        } else {
+          _this.nameError = '';
+          _this.surnameError = '';
+          _this.aboutError = '';
+          _this.name = '';
+          _this.surname = '';
+          _this.about = '';
+          console.log(res.data.success);
+
+          _this.close();
+        }
       })["catch"](function (err) {
         console.log(err);
       });
+    },
+    close: function close() {
+      this.$parent.createArchitectVisible = !this.$parent.createArchitectVisible;
     }
   }
 });
@@ -16651,7 +16695,17 @@ __webpack_require__.r(__webpack_exports__);
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_CreateArchitectForm = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("CreateArchitectForm");
 
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_CreateArchitectForm);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_CreateArchitectForm, {
+    createArchitectVisible: $data.createArchitectVisible
+  }, null, 8
+  /* PROPS */
+  , ["createArchitectVisible"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.createArchitect && $options.createArchitect.apply($options, arguments);
+    })
+  }, "Add New Architect")], 64
+  /* STABLE_FRAGMENT */
+  );
 }
 
 /***/ }),
@@ -16670,27 +16724,91 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
 var _hoisted_1 = {
+  key: 0,
   "class": "form",
+  ref: "createArchitectDOM"
+};
+var _hoisted_2 = {
   ref: "createArchitect"
 };
 
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<button type=\"button\" class=\"close\">X</button><h2>Add New Architect</h2><div class=\"input\"><label>Name</label><input type=\"text\" name=\"name\" placeholder=\"enter name\"><span></span></div><div class=\"input\"><label>Surname</label><input type=\"text\" name=\"surname\" placeholder=\"enter surname\"><span></span></div><div class=\"input textarea\"><label>About</label><textarea name=\"about\" placeholder=\"name\"></textarea><span></span></div>", 5);
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("h2", null, "Add New Architect", -1
+/* HOISTED */
+);
 
-var _hoisted_7 = {
+var _hoisted_4 = {
+  "class": "input"
+};
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Name", -1
+/* HOISTED */
+);
+
+var _hoisted_6 = {
+  "class": "input"
+};
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "Surname", -1
+/* HOISTED */
+);
+
+var _hoisted_8 = {
+  "class": "input textarea"
+};
+
+var _hoisted_9 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("label", null, "About", -1
+/* HOISTED */
+);
+
+var _hoisted_10 = {
   "class": "submit"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", null, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+  return $props.createArchitectVisible ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("form", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+    type: "button",
+    "class": "close",
+    onClick: _cache[1] || (_cache[1] = function () {
+      return $options.close && $options.close.apply($options, arguments);
+    })
+  }, "X"), _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    name: "name",
+    placeholder: "enter name",
+    value: $data.name
+  }, null, 8
+  /* PROPS */
+  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.nameError), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_6, [_hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
+    type: "text",
+    name: "surname",
+    placeholder: "enter surname",
+    value: $data.surname
+  }, null, 8
+  /* PROPS */
+  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.surnameError), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_8, [_hoisted_9, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("textarea", {
+    name: "about",
+    placeholder: "about",
+    value: $data.about
+  }, null, 8
+  /* PROPS */
+  , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.aboutError), 1
+  /* TEXT */
+  )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("input", {
     type: "submit",
     "class": "button",
     id: "submit",
     value: "Submit",
-    onClick: _cache[1] || (_cache[1] = function () {
+    onClick: _cache[2] || (_cache[2] = function () {
       return $options.createArchitect && $options.createArchitect.apply($options, arguments);
     })
-  })])])], 512
+  })])], 512
   /* NEED_PATCH */
-  );
+  )], 512
+  /* NEED_PATCH */
+  )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true);
 }
 
 /***/ }),

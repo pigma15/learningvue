@@ -1,5 +1,6 @@
 <template>
-    <CreateArchitectForm />
+    <CreateArchitectForm :createArchitectVisible="createArchitectVisible"/>
+    <button @click="createArchitect">Add New Architect</button>
 </template>
 
 <script>
@@ -11,6 +12,7 @@ import CreateArchitectForm from './templates/CreateArchitectForm.vue'
         data() {
             return {
                 architects: [],
+                createArchitectVisible: false
             }
         },
         mounted() {
@@ -21,7 +23,9 @@ import CreateArchitectForm from './templates/CreateArchitectForm.vue'
                 }).catch(err => { console.log(err); });
         },
         methods: {
-
+            createArchitect() {
+                this.createArchitectVisible = !this.createArchitectVisible;
+            }
         },
         computed: {
             

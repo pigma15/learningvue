@@ -19,68 +19,44 @@ class ArchitectController extends Controller
         );
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $architect = null;
+        $error = null;
+        
+        if (isset($request['name']) && '' != $request['name'] && !preg_match('/<script>/', $request['name']) && !preg_match('/onerror/', $request['name']) && 30 > mb_strlen($request['name'])) {
+            $architect['name'] = $request['name'];
+        } else {
+            $error['name'] = 'invalid name';
+        }
+
+        if (isset($request['surname']) && '' != $request['surname'] && !preg_match('/<script>/', $request['surname']) && !preg_match('/onerror/', $request['surname']) && 30 > mb_strlen($request['surname'])) {
+            $architect['surname'] = $request['surname'];
+        } else {
+            $error['surname'] = 'invalid surname';
+        }
+
+        if (isset($request['about']) && '' != $request['about'] && !preg_match('/<script>/', $request['about']) && !preg_match('/onerror/', $request['about']) && 1000 > mb_strlen($request['about'])) {
+            $architect['about'] = $request['about'];
+        } else {
+            $error['about'] = 'invalid about section';
+        }
+
+        if(null === $error) {
+            Architect::create($architect);
+            return Response::json(
+                [
+                    'success' => ['name' => $architect['name'], 'surname' => $architect['surname']]
+                ]
+            );
+        }
+        
         return Response::json(
             [
-                'success' => 'success',
+                'architect' => $architect,
+                'error' => $error
             ]
         );
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Architect  $architect
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Architect $architect)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Architect  $architect
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Architect $architect)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Architect  $architect
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Architect $architect)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Architect  $architect
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Architect $architect)
-    {
-        //
-    }
+    
 }
