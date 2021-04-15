@@ -1,0 +1,17 @@
+.aboutArchitect {
+    @include form;
+    left: 0;
+    display: none;
+    & > div {
+        width: 80%;
+        padding: 2rem;
+        background: $from-inside;
+        border: 2px solid $form-border;
+        border-radius: 1rem;
+        position: relative;
+        & p {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+    }
+}

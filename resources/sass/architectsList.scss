@@ -10,7 +10,7 @@ div.list.architects {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-column: 3/7;
-        & button {
+        & > button {
             @include button;
             font-size: 1.2rem;
             margin: 0.2rem 3rem;
@@ -18,6 +18,9 @@ div.list.architects {
             &.delete {
                 color: $button-font-color-hover;
                 background: $button-attention;
+                &:hover {
+                    background: $font-error;
+                }
             }
         }
     }

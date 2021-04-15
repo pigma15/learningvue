@@ -23,16 +23,24 @@
             <span> {{ architect.name }} </span>
             <span> {{ architect.surname }} </span>
             <div class="bottom actions">
-                <button>read about</button>
-                <button>edit</button>
-                <button class="delete">DELETE</button>
+                <button @click="readAbout(architect.id)" >read about</button>
+                <AboutArchitect :architect="architect"/>
+                <button @click="editArchitect(architect.id)">edit</button>
+                <EditArchitect :architect="architect"/>
+                <button class="delete" @click="openDelete(architect.id)">DELETE</button>
+                <ArchitectDelete :architect="architect"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import ArchitectDelete from './ArchitectDelete.vue'
+import AboutArchitect from './AboutArchitect.vue'
+import EditArchitect from './EditArchitect.vue'
+
 export default {
+    components: { ArchitectDelete, AboutArchitect, EditArchitect },
     props: ['architects'],
     data() {
         return {
@@ -73,6 +81,15 @@ export default {
                     this.$refs.sortBySurname.classList.toggle('down');
                 }
             }
+        },
+        openDelete(id) {
+            document.getElementById(`deleteArchitect${id}`).style.display = 'grid';
+        },
+        readAbout(id) {
+            document.getElementById(`aboutArchitect${id}`).style.display = 'grid';
+        },
+        editArchitect(id) {
+            document.getElementById(`editArchitect${id}`).style.display = 'grid';
         }
     }
 }
