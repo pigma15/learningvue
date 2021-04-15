@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Architect;
+use App\Models\Project;
 use App\Http\Resources\ArchitectResource;
 use Illuminate\Http\Request;
 use Response;
@@ -115,21 +116,35 @@ class ArchitectController extends Controller
     public function delete(Request $request)
     {
         $architect = Architect::find($request['id']);
+        $project = null;
+        $projects = Project::all();
 
-        if (null === $architect) {
+        foreach($projects as $proj) {
+            if ($proj['architect_id'] === $architect['id']) $project = $proj;
+        }
+
+        if (null != $project) {
             return Response::json(
                 [
-                    'error' => 'corrupted id',
+                    'error' => 'can not delete architect with existing projects',
                 ]
             );
         } else {
-            $architect->delete();
-            return Response::json(
-                [
-                    'deletedArchitect' => $architect,
-                    'architects' => Architect::all()
-                ]
-            );
+            if (null === $architect) {
+                return Response::json(
+                    [
+                        'error' => 'corrupted id',
+                    ]
+                );
+            } else {
+                $architect->delete();
+                return Response::json(
+                    [
+                        'deletedArchitect' => $architect,
+                        'architects' => Architect::all()
+                    ]
+                );
+            }
         }
 
     }

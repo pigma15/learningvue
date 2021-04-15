@@ -15,6 +15,12 @@
                     <div class="arrow" ref="sortBySurname"></div>
                 </div>
             </div>
+            <div class="top">
+                <span>Projects</span>
+                <div class="sort" @click="sortBy('count')">
+                    <div class="arrow" ref="sortByCount"></div>
+                </div>
+            </div>
             <div class="top actions">
                 <span>Actions</span>
             </div>
@@ -22,9 +28,10 @@
         <div class="line" v-for="architect in filteredArchitects" :key="architect">
             <span> {{ architect.name }} </span>
             <span> {{ architect.surname }} </span>
+            <span> {{ this.countProjects(architect.id) }} </span>
             <div class="bottom actions">
                 <button @click="readAbout(architect.id)" >read about</button>
-                <AboutArchitect :architect="architect"/>
+                <AboutArchitect :architect="architect" :projects="projects"/>
                 <button @click="editArchitect(architect.id)">edit</button>
                 <EditArchitect :architect="architect"/>
                 <button class="delete" @click="openDelete(architect.id)">DELETE</button>
@@ -41,12 +48,13 @@ import EditArchitect from './EditArchitect.vue'
 
 export default {
     components: { ArchitectDelete, AboutArchitect, EditArchitect },
-    props: ['architects'],
+    props: ['architects', 'projects' ],
     data() {
         return {
             sortByName: 'asc',
             sortBySurname: 'asc',
-            searchArchitects: ''
+            sortByCount: 'asc',
+            searchArchitects: '',
         }
     },
     computed: {
@@ -81,6 +89,17 @@ export default {
                     this.$refs.sortBySurname.classList.toggle('down');
                 }
             }
+            if(attr === 'count') {
+                if ('dsc' === this.sortByCount) {
+                    this.$parent.architects.sort((a, b) => (this.countProjects(a.id) > this.countProjects(b.id)) ? 1 : -1);
+                    this.sortByCount = 'asc';
+                    this.$refs.sortByCount.classList.toggle('down');
+                } else {
+                    this.$parent.architects.sort((a, b) => (this.countProjects(a.id) < this.countProjects(b.id)) ? 1 : -1);
+                    this.sortByCount = 'dsc';
+                    this.$refs.sortByCount.classList.toggle('down');
+                }
+            }
         },
         openDelete(id) {
             document.getElementById(`deleteArchitect${id}`).style.display = 'grid';
@@ -90,6 +109,13 @@ export default {
         },
         editArchitect(id) {
             document.getElementById(`editArchitect${id}`).style.display = 'grid';
+        },
+        countProjects(id) {
+            let count = 0;
+            for (let project of this.projects) {
+                if (project.architect_id === id) count++;
+            }
+            return count;
         }
     }
 }

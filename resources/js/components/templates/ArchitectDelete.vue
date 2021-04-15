@@ -7,6 +7,7 @@
                 <input type="submit" value="YES" @click="deleteArchitect" :id="'deleteArchitectSubmit' + architect.id">
                 <button class="cancelDelete" type="button" @click="cancelDelete(architect.id)">NO</button>
             </div>
+            <p class="error">{{error}}</p>
         </form>
     </div>
 </template>
@@ -16,22 +17,28 @@ export default {
     props: ['architect'],
     data() {
         return {
-
+            error: ''
         }
     },
     methods: {
         cancelDelete(id) {
             document.getElementById(`deleteArchitect${id}`).style.display = 'none';
+            this.error = '';
         },
         deleteArchitect(e) {
             e.preventDefault();
             const id = e.target.id.replace('deleteArchitectSubmit', 'deleteConfirm');
             axios.post('http://localhost/bit/learningvue/public/architects/delete', new FormData(this.$refs[id]))
             .then(res => {
-                console.log(res.data);
-                this.$parent.$parent.architects = res.data.architects;
+                if(res.data.error) {
+                    this.error = res.data.error ?? '';
+                } else {
+                    console.log(res.data);
+                    this.error = '';
+                    this.$parent.$parent.architects = res.data.architects;
+                    this.cancelDelete(id.replace('deleteConfirm', ''));
+                }
             }).catch(err => { console.log(err) });
-            this.cancelDelete(id.replace('deleteConfirm', ''));
         }
     }
 }

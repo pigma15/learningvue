@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ArchitectController;
+use App\Http\Controllers\ProjectController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,4 +25,10 @@ Route::group(['prefix' => 'architects'], function(){
     Route::post('create', [ArchitectController::class, 'create']);
     Route::post('delete', [ArchitectController::class, 'delete']);
     Route::post('edit', [ArchitectController::class, 'edit']);
+ });
+
+
+ Route::group(['prefix' => 'projects'], function(){
+    Route::post('', [ProjectController::class, 'index']);
+    Route::post('create', [ProjectController::class, 'create']);
  });

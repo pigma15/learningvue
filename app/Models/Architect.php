@@ -14,4 +14,9 @@ class Architect extends Model
         'surname',
         'about'
     ];
+
+    public function projects()
+    {
+        return $this->hasMany('App\Models\Project', 'architect_id', 'id');
+    }
 }

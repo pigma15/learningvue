@@ -41,6 +41,10 @@ h2 {
   font-size: 3rem;
 }
 
+h3 {
+  font-size: 2rem;
+}
+
 div.navbar {
   display: flex;
   width: 100%;
@@ -124,6 +128,8 @@ div.form form div.input {
   grid-column: auto/span 1;
   width: 100%;
   margin: 0.3rem 0;
+  /*  */
+  /*  */
 }
 
 div.form form div.input label,
@@ -175,6 +181,21 @@ div.form form div.input span {
   color: #911;
   padding: 0.4rem 0.2rem;
   font-size: 1.4rem;
+}
+
+div.form form div.input.select {
+  position: relative;
+  width: 90%;
+  margin: 0 5%;
+}
+
+div.form form div.input.select label,
+div.form form div.input.select span {
+  margin-left: 0;
+}
+
+div.form form div.input.select select {
+  width: 100%;
 }
 
 div.form form div.input.textarea {
@@ -300,6 +321,7 @@ div.list.architects .line {
 div.list.architects .line span {
   display: grid;
   place-items: center;
+  text-align: center;
 }
 
 div.list.architects .line:first-of-type {
@@ -354,7 +376,7 @@ div.list.architects .line .top .sort .arrow.down {
 }
 
 div.list.architects .top.actions {
-  grid-column: 3/7;
+  grid-column: 4/8;
 }
 
 div.list.architects .top.actions span {
@@ -364,7 +386,7 @@ div.list.architects .top.actions span {
 div.list.architects .bottom.actions {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-column: 3/7;
+  grid-column: 4/8;
 }
 
 div.list.architects .bottom.actions > button {
@@ -405,7 +427,170 @@ div.list.architects .bottom.actions > button.delete:hover {
 }
 
 div.list.architects div.line {
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+
+div.list.projects {
+  display: inline-block;
+  background: #eee;
+  width: 90%;
+  margin: 1rem 5%;
+  padding: 2rem;
+  border: 2px solid #3338;
+  border-radius: 1rem;
+  position: relative;
+}
+
+div.list.projects .search {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  width: 16rem;
+  height: 3rem;
+  background: #eee;
+  border: 2px solid #888;
+  border-radius: 0.4rem;
+  padding-left: 0.4rem;
+}
+
+div.list.projects .search:focus {
+  background: #fff;
+  border: 2px solid #333;
+  outline: none;
+}
+
+div.list.projects h2 {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 3.6rem;
+  margin: 2rem 0 4rem;
+  position: relative;
+}
+
+div.list.projects .line {
+  display: grid;
+  width: 80%;
+  height: 2.4rem;
+  margin: 0.2rem 10%;
+}
+
+div.list.projects .line span {
+  display: grid;
+  place-items: center;
+  text-align: center;
+}
+
+div.list.projects .line:first-of-type {
+  margin-bottom: 2rem;
+}
+
+div.list.projects .line:nth-of-type(even) {
+  background: #ddd8;
+  border-radius: 0.4rem;
+}
+
+div.list.projects .line .top {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  margin: 0 5%;
+}
+
+div.list.projects .line .top span {
+  font-size: 1.8rem;
+  width: 70%;
+  text-align: center;
+}
+
+div.list.projects .line .top .sort {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  float: left;
+  cursor: pointer;
+  background: #ddd8;
+  border: 1px solid #888;
+  border-radius: 50%;
+}
+
+div.list.projects .line .top .sort:hover {
+  border: 1px solid #333;
+}
+
+div.list.projects .line .top .sort .arrow {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  border-left: 0.7rem solid transparent;
+  border-right: 0.7rem solid transparent;
+  border-bottom: 0.7rem solid #444;
+}
+
+div.list.projects .line .top .sort .arrow.down {
+  transform: rotate(180deg);
+}
+
+div.list.projects .top.actions {
+  grid-column: 4/8;
+}
+
+div.list.projects .top.actions span {
+  width: 100%;
+}
+
+div.list.projects .bottom.actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  grid-column: 4/8;
+}
+
+div.list.projects .bottom.actions > button {
+  display: grid;
+  place-items: center;
+  background: #fff;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  color: #333;
+  border: 2px solid #3338;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 1px 0.5rem 0.2rem #aaaa;
+  font-size: 1.2rem;
+  margin: 0.2rem 3rem;
+  padding: 0;
+  height: 2.4rem;
+}
+
+div.list.projects .bottom.actions > button:hover {
+  background: #999;
+  color: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 1px 0.8rem 0.8rem #aaaa;
+}
+
+div.list.projects .bottom.actions > button:focus {
+  border: 2px solid #333;
+  outline: none;
+}
+
+div.list.projects .bottom.actions > button.delete {
+  color: #fff;
+  background: #d88;
+}
+
+div.list.projects .bottom.actions > button.delete:hover {
+  background: #911;
+}
+
+div.list.projects div.line {
+  grid-template-columns: repeat(6, 1fr);
+  height: auto;
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .deleteArchitect {
@@ -481,6 +666,8 @@ div.list.architects div.line {
   grid-column: auto/span 1;
   width: 100%;
   margin: 0.3rem 0;
+  /*  */
+  /*  */
 }
 
 .deleteArchitect form div.input label,
@@ -532,6 +719,21 @@ div.list.architects div.line {
   color: #911;
   padding: 0.4rem 0.2rem;
   font-size: 1.4rem;
+}
+
+.deleteArchitect form div.input.select {
+  position: relative;
+  width: 90%;
+  margin: 0 5%;
+}
+
+.deleteArchitect form div.input.select label,
+.deleteArchitect form div.input.select span {
+  margin-left: 0;
+}
+
+.deleteArchitect form div.input.select select {
+  width: 100%;
 }
 
 .deleteArchitect form div.input.textarea {
@@ -665,6 +867,11 @@ div.list.architects div.line {
   margin: 4rem 0;
 }
 
+.deleteArchitect p.error {
+  color: #911;
+  margin: 2rem;
+}
+
 .aboutArchitect {
   display: grid;
   place-items: center;
@@ -738,6 +945,8 @@ div.list.architects div.line {
   grid-column: auto/span 1;
   width: 100%;
   margin: 0.3rem 0;
+  /*  */
+  /*  */
 }
 
 .aboutArchitect form div.input label,
@@ -789,6 +998,21 @@ div.list.architects div.line {
   color: #911;
   padding: 0.4rem 0.2rem;
   font-size: 1.4rem;
+}
+
+.aboutArchitect form div.input.select {
+  position: relative;
+  width: 90%;
+  margin: 0 5%;
+}
+
+.aboutArchitect form div.input.select label,
+.aboutArchitect form div.input.select span {
+  margin-left: 0;
+}
+
+.aboutArchitect form div.input.select select {
+  width: 100%;
 }
 
 .aboutArchitect form div.input.textarea {
@@ -878,6 +1102,16 @@ div.list.architects div.line {
 .aboutArchitect > div p {
   text-align: center;
   margin-bottom: 3rem;
+}
+
+.aboutArchitect > div h3 {
+  padding: 0.4rem 3rem;
+  text-align: center;
+}
+
+.aboutArchitect > div .projects p {
+  margin-bottom: 1rem;
+  padding: 0.2rem 3rem;
 }
 
 div.editArchitect {
