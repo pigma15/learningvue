@@ -1,18 +1,24 @@
 <template>
-    <CreateArchitectForm :createArchitectVisible="createArchitectVisible"/>
-    <button @click="createArchitect">Add New Architect</button>
+    <Navbar />
+    <ArchitectList :architects="architects" v-if="architectListVisible"/>
+    <CreateArchitectForm :createArchitectVisible="createArchitectVisible" />
+
 </template>
 
 <script>
+import Navbar from './templates/Navbar.vue'
 import CreateArchitectForm from './templates/CreateArchitectForm.vue'
+import ArchitectList from './templates/ArchitectList.vue'
+
 
     export default {
         name: "App",
-        components: { CreateArchitectForm },
+        components: { Navbar, CreateArchitectForm, ArchitectList },
         data() {
             return {
                 architects: [],
-                createArchitectVisible: false
+                createArchitectVisible: false,
+                architectListVisible: true
             }
         },
         mounted() {

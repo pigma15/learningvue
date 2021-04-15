@@ -62,6 +62,7 @@ export default {
                     this.surname = '';
                     this.about = '';
                     console.log(res.data.success);
+                    this.$parent.architects = res.data.architects;
                     this.close();
                 }
             }).catch(err => { console.log(err); });

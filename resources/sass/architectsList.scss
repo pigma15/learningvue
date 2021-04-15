@@ -1,0 +1,7 @@
+div.list.architects {
+    @include list;
+
+    & div.line {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}

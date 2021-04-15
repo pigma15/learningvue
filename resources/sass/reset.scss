@@ -15,8 +15,10 @@ body * {
 }
 
 body {
+    position: relative;
     background-image: $background-image;
     background-attachment: fixed;
+    padding-top: 12rem;
     min-height: 200vh; /*  */
 }
 

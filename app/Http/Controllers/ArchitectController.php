@@ -46,7 +46,8 @@ class ArchitectController extends Controller
             Architect::create($architect);
             return Response::json(
                 [
-                    'success' => ['name' => $architect['name'], 'surname' => $architect['surname']]
+                    'success' => ['name' => $architect['name'], 'surname' => $architect['surname']],
+                    'architects' => Architect::all()
                 ]
             );
         }
