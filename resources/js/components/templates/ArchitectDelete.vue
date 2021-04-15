@@ -31,7 +31,7 @@ export default {
                 console.log(res.data);
                 this.$parent.$parent.architects = res.data.architects;
             }).catch(err => { console.log(err) });
-            document.getElementById(`deleteArchitect${id.replace('deleteConfirm', '')}`).style.display = 'none';
+            this.cancelDelete(id.replace('deleteConfirm', ''));
         }
     }
 }

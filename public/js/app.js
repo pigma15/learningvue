@@ -16676,7 +16676,7 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (err) {
         console.log(err);
       });
-      document.getElementById("deleteArchitect".concat(id.replace('deleteConfirm', ''))).style.display = 'none';
+      this.cancelDelete(id.replace('deleteConfirm', ''));
     }
   }
 });
@@ -16853,6 +16853,9 @@ __webpack_require__.r(__webpack_exports__);
   props: ['architect'],
   data: function data() {
     return {
+      name: this.architect.name,
+      surname: this.architect.surname,
+      about: this.architect.name.about,
       nameError: '',
       surnameError: '',
       aboutError: ''
@@ -16860,30 +16863,34 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     editArchitect: function editArchitect(e) {
+      var _this = this;
+
       e.preventDefault();
       var id = e.target.id.replace('editArchitectSubmit', 'editArchitect');
       axios.post('http://localhost/bit/learningvue/public/architects/edit', new FormData(this.$refs[id])).then(function (res) {
-        console.log(res.data);
-        /* if (res.data.error) {
-            this.nameError = res.data.error.name ?? '';
-            this.surnameError = res.data.error.surname ?? '';
-            this.aboutError = res.data.error.about ?? '';
-            if (res.data.architect) {
-                this.name = res.data.architect.name ?? '';
-                this.surname = res.data.architect.surname ?? '';
-                this.about = res.data.architect.about ?? '';
-            }
+        if (res.data.error) {
+          var _res$data$error$name, _res$data$error$surna, _res$data$error$about;
+
+          _this.nameError = (_res$data$error$name = res.data.error.name) !== null && _res$data$error$name !== void 0 ? _res$data$error$name : '';
+          _this.surnameError = (_res$data$error$surna = res.data.error.surname) !== null && _res$data$error$surna !== void 0 ? _res$data$error$surna : '';
+          _this.aboutError = (_res$data$error$about = res.data.error.about) !== null && _res$data$error$about !== void 0 ? _res$data$error$about : '';
+
+          if (res.data.architect) {
+            var _res$data$architect$n, _res$data$architect$s, _res$data$architect$a;
+
+            _this.name = (_res$data$architect$n = res.data.architect.name) !== null && _res$data$architect$n !== void 0 ? _res$data$architect$n : '';
+            _this.surname = (_res$data$architect$s = res.data.architect.surname) !== null && _res$data$architect$s !== void 0 ? _res$data$architect$s : '';
+            _this.about = (_res$data$architect$a = res.data.architect.about) !== null && _res$data$architect$a !== void 0 ? _res$data$architect$a : '';
+          }
         } else {
-            this.nameError = '';
-            this.surnameError = '';
-            this.aboutError = '';
-            this.name = '';
-            this.surname = '';
-            this.about = '';
-            console.log(res.data.success);
-            this.$parent.architects = res.data.architects;
-            this.close();
-        } */
+          _this.nameError = '';
+          _this.surnameError = '';
+          _this.aboutError = '';
+          console.log(res.data.success);
+          _this.$parent.$parent.architects = res.data.architects;
+
+          _this.cancelEditArchitect(id.replace('editArchitect', ''));
+        }
       })["catch"](function (err) {
         console.log(err);
       });
@@ -17337,7 +17344,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     type: "text",
     name: "name",
     placeholder: "enter name",
-    value: $props.architect.name
+    value: $data.name
   }, null, 8
   /* PROPS */
   , ["value"]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("span", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.nameError), 1

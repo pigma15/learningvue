@@ -6,7 +6,7 @@
         <h2>Edit {{ architect.name }} {{ architect.surname }} </h2>
         <div class="input">
             <label>Name</label>
-            <input type="text" name="name" placeholder="enter name" :value="architect.name">
+            <input type="text" name="name" placeholder="enter name" :value="name">
             <span>{{nameError}}</span>
         </div>
         <div class="input">
@@ -33,6 +33,9 @@ export default {
     props: ['architect'],
     data() {
         return {
+            name: this.architect.name,
+            surname: this.architect.surname,
+            about: this.architect.name.about,
             nameError: '',
             surnameError: '',
             aboutError: ''
@@ -44,8 +47,7 @@ export default {
             const id = e.target.id.replace('editArchitectSubmit', 'editArchitect');
             axios.post('http://localhost/bit/learningvue/public/architects/edit', new FormData(this.$refs[id]))
             .then(res => {
-                console.log(res.data);
-                /* if (res.data.error) {
+                 if (res.data.error) {
                     this.nameError = res.data.error.name ?? '';
                     this.surnameError = res.data.error.surname ?? '';
                     this.aboutError = res.data.error.about ?? '';
@@ -54,17 +56,14 @@ export default {
                         this.surname = res.data.architect.surname ?? '';
                         this.about = res.data.architect.about ?? '';
                     }
-                } else {
+                }else {
                     this.nameError = '';
                     this.surnameError = '';
                     this.aboutError = '';
-                    this.name = '';
-                    this.surname = '';
-                    this.about = '';
-                    console.log(res.data.success);
-                    this.$parent.architects = res.data.architects;
-                    this.close();
-                } */
+                    console.log(res.data.success); 
+                    this.$parent.$parent.architects = res.data.architects;
+                    this.cancelEditArchitect(id.replace('editArchitect', ''));
+                }
             }).catch(err => { console.log(err); });
         },
         cancelEditArchitect(id) {
