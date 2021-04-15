@@ -16933,6 +16933,12 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     close: function close() {
+      this.nameError = '';
+      this.surnameError = '';
+      this.aboutError = '';
+      this.name = '';
+      this.surname = '';
+      this.about = '';
       this.$parent.createArchitectVisible = !this.$parent.createArchitectVisible;
     }
   }
@@ -17003,6 +17009,13 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     close: function close() {
+      this.nameError = '';
+      this.locationError = '';
+      this.aboutError = '';
+      this.architectError = '';
+      this.name = '';
+      this.location = '';
+      this.about = '';
       this.$parent.createProjectVisible = !this.$parent.createProjectVisible;
     }
   }

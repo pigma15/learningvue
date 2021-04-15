@@ -79,6 +79,13 @@ export default {
             }).catch(err => { console.log(err); });
         },
         close() {
+            this.nameError = '';
+            this.locationError = '';
+            this.aboutError = '';
+            this.architectError = '';
+            this.name = '';
+            this.location = '';
+            this.about = '';
             this.$parent.createProjectVisible = !this.$parent.createProjectVisible;
         }
     }

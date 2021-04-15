@@ -68,6 +68,12 @@ export default {
             }).catch(err => { console.log(err); });
         },
         close() {
+            this.nameError = '';
+            this.surnameError = '';
+            this.aboutError = '';
+            this.name = '';
+            this.surname = '';
+            this.about = '';
             this.$parent.createArchitectVisible = !this.$parent.createArchitectVisible;
         }
     }
