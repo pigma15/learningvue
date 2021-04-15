@@ -31,23 +31,23 @@
             <span> {{ this.getArchitect(project.architect_id) }} </span>
             <div class="bottom actions">
                 <button @click="readAbout(project.id)" >read about</button>
-                <!-- <AboutProject :project="project" :architect="this.getArchitect(project.architect_id)"/> -->
+                <AboutProject :project="project" :architect="this.getArchitect(project.architect_id)"/>
                 <button @click="editProject(project.id)">edit</button>
-                <!-- <EditArchitect :project="project" :architect="this.getArchitect(project.architect_id)"/> -->
+                <EditProject :project="project" :architectCurrent="this.getArchitectID(project.architect_id)" :architects="architects"/>
                 <button class="delete" @click="openDelete(project.id)">DELETE</button>
-                <!-- <ArchitectDelete :project="project"/> -->
+                <ProjectDelete :project="project"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-/* import ProjectDelete from './ProjectDelete.vue'
+import ProjectDelete from './ProjectDelete.vue'
 import AboutProject from './AboutProject.vue'
-import EditProject from './EditProject.vue' */
+import EditProject from './EditProject.vue'
 
 export default {
-    /* components: { ProjectDelete, AboutProject, EditProject }, */
+    components: { ProjectDelete, AboutProject, EditProject },
     props: ['architects', 'projects' ],
     data() {
         return {
@@ -107,13 +107,20 @@ export default {
         readAbout(id) {
             document.getElementById(`aboutProject${id}`).style.display = 'grid';
         },
-        editArchitect(id) {
+        editProject(id) {
             document.getElementById(`editProject${id}`).style.display = 'grid';
         },
         getArchitect(id) {
             for (let architect of this.architects) {
                 if (architect.id === id) {
                     return `${architect.name} ${architect.surname}`;
+                }
+            }
+        },
+        getArchitectID(id) {
+            for (let architect of this.architects) {
+                if (architect.id === id) {
+                    return architect;
                 }
             }
         },

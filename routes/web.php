@@ -31,4 +31,6 @@ Route::group(['prefix' => 'architects'], function(){
  Route::group(['prefix' => 'projects'], function(){
     Route::post('', [ProjectController::class, 'index']);
     Route::post('create', [ProjectController::class, 'create']);
+    Route::post('delete', [ProjectController::class, 'delete']);
+    Route::post('edit', [ProjectController::class, 'edit']);
  });

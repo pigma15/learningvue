@@ -15,6 +15,7 @@ div.list.architects {
             font-size: 1.2rem;
             margin: 0.2rem 3rem;
             padding: 0;
+            height: 2.4rem;
             &.delete {
                 color: $button-font-color-hover;
                 background: $button-attention;
@@ -26,5 +27,6 @@ div.list.architects {
     }
     & div.line {
         grid-template-columns: repeat(6, 1fr);
+        height: auto;
     }
 }

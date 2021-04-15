@@ -1,0 +1,35 @@
+.deleteProject {
+    @include form;
+    left: 0;
+    display: none;
+    & form {
+        grid-template-columns: 1fr;
+        place-items: center;
+        & div.deleteButtons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            & button, input[type=submit] {
+                @include button;
+                width: 30%;
+                font-size: 2rem;
+            }
+            & input[type=submit] {
+                color: $button-font-color-hover;
+                background: $button-attention;
+                &:hover {
+                    background: $font-error;
+                }
+            }
+        }
+    }
+    & p {
+        width: 100%;
+        text-align: center;
+        margin: 4rem 0;
+        &.error {
+            color: $font-error;
+            margin: 2rem;
+        }
+    }
+}
