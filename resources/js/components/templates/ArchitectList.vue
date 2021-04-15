@@ -15,10 +15,18 @@
                     <div class="arrow" ref="sortBySurname"></div>
                 </div>
             </div>
+            <div class="top actions">
+                <span>Actions</span>
+            </div>
         </div>
         <div class="line" v-for="architect in filteredArchitects" :key="architect">
             <span> {{ architect.name }} </span>
             <span> {{ architect.surname }} </span>
+            <div class="bottom actions">
+                <button>read about</button>
+                <button>edit</button>
+                <button class="delete">DELETE</button>
+            </div>
         </div>
     </div>
 </template>
