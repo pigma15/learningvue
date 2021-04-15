@@ -63,6 +63,7 @@ div.form {
   background: #ddd8;
   -webkit-backdrop-filter: blur(6px);
           backdrop-filter: blur(6px);
+  z-index: 10;
 }
 
 div.form button.close {
@@ -84,7 +85,6 @@ div.form button.close {
   font-size: 1.5rem;
   padding: 0;
   margin: 0;
-  z-index: 10;
 }
 
 div.form button.close:hover {
@@ -327,8 +327,17 @@ div.list.architects .line .top span {
 div.list.architects .line .top .sort {
   display: grid;
   place-items: center;
-  width: 30%;
+  width: 2.4rem;
+  height: 2.4rem;
   float: left;
+  cursor: pointer;
+  background: #ddd8;
+  border: 1px solid #888;
+  border-radius: 50%;
+}
+
+div.list.architects .line .top .sort:hover {
+  border: 1px solid #333;
 }
 
 div.list.architects .line .top .sort .arrow {
@@ -338,7 +347,6 @@ div.list.architects .line .top .sort .arrow {
   border-left: 0.7rem solid transparent;
   border-right: 0.7rem solid transparent;
   border-bottom: 0.7rem solid #444;
-  cursor: pointer;
 }
 
 div.list.architects .line .top .sort .arrow.down {

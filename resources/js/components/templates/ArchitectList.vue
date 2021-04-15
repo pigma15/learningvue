@@ -5,14 +5,14 @@
         <div class="line">
             <div class="top">
                 <span>Name</span>
-                <div class="sort">
-                    <div class="arrow" @click="sortBy('name')" ref="sortByName"></div>
+                <div class="sort" @click="sortBy('name')">
+                    <div class="arrow" ref="sortByName"></div>
                 </div>
             </div>
             <div class="top">
                 <span>Surname</span>
-                <div class="sort">
-                    <div class="arrow" @click="sortBy('surname')" ref="sortBySurname"></div>
+                <div class="sort" @click="sortBy('surname')">
+                    <div class="arrow" ref="sortBySurname"></div>
                 </div>
             </div>
         </div>
