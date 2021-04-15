@@ -155,6 +155,22 @@ $sort-arrow: #444;
 }
 
 @mixin list {
+    & .search {
+        position: absolute;
+        top: 2rem;
+        left: 2rem;
+        width: 16rem;
+        height: 3rem;
+        background: $input-background;
+        border: 2px solid $input-border;
+        border-radius: 0.4rem;
+        padding-left: 0.4rem;
+        &:focus {
+            background: $input-background-focus;
+            border: 2px solid $input-border-focus;
+            outline: none;
+        }
+    }
     display: inline-block;
     background: $from-inside;
     width: 90%;
@@ -169,6 +185,7 @@ $sort-arrow: #444;
         width: 100%;
         height: 3.6rem;
         margin: 2rem 0 4rem;
+        position: relative;
     }
     & .line {
         display: grid;

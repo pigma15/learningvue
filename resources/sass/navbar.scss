@@ -6,4 +6,6 @@ div.navbar {
     position: fixed;
     top: 0;
     background: $from-inside;
+    z-index: 9;
+    border-bottom: 2px solid $form-border;
 }
