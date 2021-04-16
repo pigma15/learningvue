@@ -2,6 +2,7 @@ div.list.architects {
     @include list;
     & .top.actions {
         grid-column: 4/8;
+        
         & span {
             width: 100%;
         }
@@ -13,7 +14,7 @@ div.list.architects {
         & > button {
             @include button;
             font-size: 1.2rem;
-            margin: 0.2rem 3rem;
+            margin: 0.2rem 1.4rem;
             padding: 0;
             height: 2.4rem;
             &.delete {
@@ -29,4 +30,24 @@ div.list.architects {
         grid-template-columns: repeat(6, 1fr);
         height: auto;
     }
+}
+
+@media (max-width: 620px) {
+    div.list.architects {
+        & div.line {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        & .top.actions {
+            display: none;
+        }
+        & .bottom.actions {
+            grid-column: 1/4;
+            margin-bottom: 0.8rem;
+            & > button {
+                width: 80%;
+                margin: 0.2rem 10%;
+            }
+        }
+    }
+
 }

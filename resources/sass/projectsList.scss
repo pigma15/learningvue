@@ -14,7 +14,7 @@ div.list.projects {
         & > button {
             @include button;
             font-size: 1.2rem;
-            margin: 0.2rem 3rem;
+            margin: 0.2rem 1.4rem;
             padding: 0;
             height: 2.4rem;
             &.delete {
@@ -29,8 +29,31 @@ div.list.projects {
     & div.line {
         grid-template-columns: repeat(6, 1fr);
         height: auto;
-        width: 100%;
         margin-left: 0;
         margin-right: 0;
     }
+}
+
+@media (max-width: 620px) {
+    div.list.projects {
+        & div.line {
+            grid-template-columns: repeat(3, 1fr);
+            & > span {
+                min-height: 2.6rem;
+                margin-top: 0.6rem;
+            }
+        }
+        & .top.actions {
+            display: none;
+        }
+        & .bottom.actions {
+            grid-column: 1/4;
+            margin-bottom: 1.6rem;
+            & > button {
+                width: 80%;
+                margin: 0.2rem 10%;
+            }
+        }
+    }
+
 }

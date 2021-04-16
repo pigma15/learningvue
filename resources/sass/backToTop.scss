@@ -1,0 +1,32 @@
+.backToTop {
+    z-index: 2;
+    & > a {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        flex-flow: column;
+        position: fixed;
+        bottom: 3rem;
+        right: 3rem;
+        width: 5rem;
+        height: 5rem;
+        border: 2px solid $form-border;
+        border-radius: 50%;
+        background-color: $form-outside;
+        transition: ease-in-out 0.3s;
+        opacity: 100%;
+        &.hidden {
+            bottom: -4rem;
+            opacity: 0%;
+        }
+        & .triangle {
+            display: inline-block;
+            width: 0; 
+            height: 0; 
+            border-left: 1rem solid transparent;
+            border-right: 1rem solid transparent;        
+            border-bottom: 1.2rem solid $sort-arrow;
+            transform: translateY(-10%);
+        }
+    }
+}

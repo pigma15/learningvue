@@ -55,7 +55,6 @@ export default {
             const id = e.target.id.replace('editProjectSubmit', 'editProject');
             axios.post('http://localhost/bit/learningvue/public/projects/edit', new FormData(this.$refs[id]))
             .then(res => {
-                console.log(res.data);
                 if (res.data.error) {
                     this.nameError = res.data.error.name ?? '';
                     this.locationError = res.data.error.location ?? '';
@@ -74,13 +73,25 @@ export default {
                     this.name = '';
                     this.location = '';
                     this.about = '';
-                    console.log(res.data.success);
+                    const message = `Project <span>${res.data.success}</span> has been edited successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = message;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.$parent.$parent.projects = res.data.projects;
                     this.cancelEditProject(id.replace('editProject', ''));
                 }
             }).catch(err => { console.log(err); });
         },
         cancelEditProject(id) {
+            this.nameError = '';
+            this.locationError = '';
+            this.aboutError = '';
+            this.architectError = '';
             document.getElementById(`editProject${id}`).style.display = 'none';
         }
     }

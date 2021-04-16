@@ -61,7 +61,15 @@ export default {
                     this.name = '';
                     this.surname = '';
                     this.about = '';
-                    console.log(res.data.success);
+                    const messege = `Architect <span>${res.data.success.name} ${res.data.success.surname}</span> has been added successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = messege;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.$parent.architects = res.data.architects;
                     this.close();
                 }

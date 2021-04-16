@@ -33,7 +33,15 @@ export default {
                 if(res.data.error) {
                     this.error = res.data.error ?? '';
                 } else {
-                    console.log(res.data);
+                    const message = `Project <span>${res.data.deletedProject.name}</span> has been removed successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = message;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.error = '';
                     this.$parent.$parent.projects = res.data.projects;
                     this.cancelDelete(id.replace('deleteConfirm', ''));

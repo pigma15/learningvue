@@ -1,9 +1,16 @@
 <template>
     <div class="navbar">
-        <button @click="createArchitect">Add New Architect</button>
-        <button @click="architectList">Architects</button>
-        <button @click="createProject">Add New Project</button>
-        <button @click="projecList">Projects</button>
+        <div class="architects">
+            <button @click="createArchitect">Add New Architect</button>
+            <button @click="architectList">Architects</button>
+        </div>
+        <div class="projects">
+            <button @click="createProject">Add New Project</button>
+            <button @click="projecList">Projects</button>
+        </div>
+        <div class="user">
+            USER PANEL
+        </div>
     </div>
 </template>
 

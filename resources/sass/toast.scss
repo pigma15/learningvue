@@ -1,0 +1,30 @@
+#toast {
+    display: grid;
+    place-items: center;
+    position: fixed;
+    top: 16rem;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: $toast-color;
+    width: 50%;
+    min-height: 10rem;
+    border: 1px solid $form-border;
+    border-radius: 0.8rem;
+    & p {
+        display: grid;
+        place-items: center;
+        width: 90%;
+        margin: 2rem 5%;
+        font-size: 1.8rem;
+        color: $toast-font;
+        text-align: center;
+        & span {
+            font-size: 2rem;
+            text-decoration: underline 1px $toast-font-light;
+            color: $toast-font-light;
+        }
+    }
+    &.hidden {
+        display: none;
+    }
+}

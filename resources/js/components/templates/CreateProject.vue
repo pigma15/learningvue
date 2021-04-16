@@ -72,7 +72,15 @@ export default {
                     this.name = '';
                     this.location = '';
                     this.about = '';
-                    console.log(res.data.success);
+                    const message = `Project <span>${res.data.success}</span> has been added successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = message;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.$parent.projects = res.data.projects;
                     this.close();
                 }

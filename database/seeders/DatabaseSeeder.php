@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         $faker = Faker::create('lt_LT');
 
-        $architects = 15;
-        $projects = 30;
+        $architects = 40;
+        $projects = 120;
 
         foreach(range(1, $architects) as $_) {
             DB::table('architects')->insert([

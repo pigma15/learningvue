@@ -35,7 +35,7 @@ export default {
         return {
             name: this.architect.name,
             surname: this.architect.surname,
-            about: this.architect.name.about,
+            about: this.architect.about,
             nameError: '',
             surnameError: '',
             aboutError: ''
@@ -60,13 +60,24 @@ export default {
                     this.nameError = '';
                     this.surnameError = '';
                     this.aboutError = '';
-                    console.log(res.data.success); 
+                    const messege = `Architect <span>${res.data.success.name} ${res.data.success.surname}</span> has been edited successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = messege;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.$parent.$parent.architects = res.data.architects;
                     this.cancelEditArchitect(id.replace('editArchitect', ''));
                 }
             }).catch(err => { console.log(err); });
         },
         cancelEditArchitect(id) {
+            this.nameError = '';
+            this.surnameError = '';
+            this.aboutError = '';
             document.getElementById(`editArchitect${id}`).style.display = 'none';
         }
     }

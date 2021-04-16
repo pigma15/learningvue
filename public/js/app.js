@@ -16606,7 +16606,9 @@ __webpack_require__.r(__webpack_exports__);
       createArchitectVisible: false,
       createProjectVisible: false,
       architectListVisible: true,
-      projectListVisible: false
+      projectListVisible: false,
+      loadingArchitects: true,
+      loadingProjects: true
     };
   },
   mounted: function mounted() {
@@ -16616,7 +16618,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.architects = res.data.architects.sort(function (a, b) {
         return a.surname > b.surname ? 1 : -1;
       });
-      ;
+      setTimeout(function () {
+        _this.loadingArchitects = false;
+      }, 6000);
     })["catch"](function (err) {
       console.log(err);
     });
@@ -16624,7 +16628,9 @@ __webpack_require__.r(__webpack_exports__);
       _this.projects = res.data.projects.sort(function (a, b) {
         return a.name > b.name ? 1 : -1;
       });
-      ;
+      setTimeout(function () {
+        _this.loadingProjects = false;
+      }, 6000);
     })["catch"](function (err) {
       console.log(err);
     });
@@ -16726,7 +16732,15 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.error = (_res$data$error = res.data.error) !== null && _res$data$error !== void 0 ? _res$data$error : '';
         } else {
-          console.log(res.data);
+          var messege = "Architect <span>".concat(res.data.deletedArchitect.name, " ").concat(res.data.deletedArchitect.surname, "</span> has been removed successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = messege;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.error = '';
           _this.$parent.$parent.architects = res.data.architects;
 
@@ -16923,7 +16937,15 @@ __webpack_require__.r(__webpack_exports__);
           _this.name = '';
           _this.surname = '';
           _this.about = '';
-          console.log(res.data.success);
+          var messege = "Architect <span>".concat(res.data.success.name, " ").concat(res.data.success.surname, "</span> has been added successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = messege;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.$parent.architects = res.data.architects;
 
           _this.close();
@@ -16999,7 +17021,15 @@ __webpack_require__.r(__webpack_exports__);
           _this.name = '';
           _this.location = '';
           _this.about = '';
-          console.log(res.data.success);
+          var message = "Project <span>".concat(res.data.success, "</span> has been added successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = message;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.$parent.projects = res.data.projects;
 
           _this.close();
@@ -17040,7 +17070,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       name: this.architect.name,
       surname: this.architect.surname,
-      about: this.architect.name.about,
+      about: this.architect.about,
       nameError: '',
       surnameError: '',
       aboutError: ''
@@ -17071,7 +17101,15 @@ __webpack_require__.r(__webpack_exports__);
           _this.nameError = '';
           _this.surnameError = '';
           _this.aboutError = '';
-          console.log(res.data.success);
+          var messege = "Architect <span>".concat(res.data.success.name, " ").concat(res.data.success.surname, "</span> has been edited successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = messege;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.$parent.$parent.architects = res.data.architects;
 
           _this.cancelEditArchitect(id.replace('editArchitect', ''));
@@ -17081,6 +17119,9 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     cancelEditArchitect: function cancelEditArchitect(id) {
+      this.nameError = '';
+      this.surnameError = '';
+      this.aboutError = '';
       document.getElementById("editArchitect".concat(id)).style.display = 'none';
     }
   }
@@ -17119,8 +17160,6 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       var id = e.target.id.replace('editProjectSubmit', 'editProject');
       axios.post('http://localhost/bit/learningvue/public/projects/edit', new FormData(this.$refs[id])).then(function (res) {
-        console.log(res.data);
-
         if (res.data.error) {
           var _res$data$error$name, _res$data$error$locat, _res$data$error$about, _res$data$error$archi;
 
@@ -17144,7 +17183,15 @@ __webpack_require__.r(__webpack_exports__);
           _this.name = '';
           _this.location = '';
           _this.about = '';
-          console.log(res.data.success);
+          var message = "Project <span>".concat(res.data.success, "</span> has been edited successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = message;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.$parent.$parent.projects = res.data.projects;
 
           _this.cancelEditProject(id.replace('editProject', ''));
@@ -17154,6 +17201,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     cancelEditProject: function cancelEditProject(id) {
+      this.nameError = '';
+      this.locationError = '';
+      this.aboutError = '';
+      this.architectError = '';
       document.getElementById("editProject".concat(id)).style.display = 'none';
     }
   }
@@ -17227,7 +17278,15 @@ __webpack_require__.r(__webpack_exports__);
 
           _this.error = (_res$data$error = res.data.error) !== null && _res$data$error !== void 0 ? _res$data$error : '';
         } else {
-          console.log(res.data);
+          var message = "Project <span>".concat(res.data.deletedProject.name, "</span> has been removed successfully");
+          var contDOM = document.querySelector('#toast');
+          var textDOM = document.querySelector('#toast > p');
+          contDOM.classList.remove('hidden');
+          textDOM.innerHTML = message;
+          setTimeout(function () {
+            contDOM.classList.add('hidden');
+            textDOM.innerHTML = '';
+          }, 3500);
           _this.error = '';
           _this.$parent.$parent.projects = res.data.projects;
 
@@ -17422,6 +17481,49 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
+var _hoisted_1 = {
+  key: 2,
+  "class": "loader"
+};
+
+var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", null, null, -1
+/* HOISTED */
+);
+
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "hidden",
+  id: "toast"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("p")], -1
+/* HOISTED */
+);
+
+var _hoisted_8 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "backToTop"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("a", {
+  "class": "hidden",
+  href: "#"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "triangle"
+})])], -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Navbar = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Navbar");
 
@@ -17454,7 +17556,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     architects: $data.architects
   }, null, 8
   /* PROPS */
-  , ["createProjectVisible", "architects"])], 64
+  , ["createProjectVisible", "architects"]), $data.loadingArchitects || $data.loadingProjects ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [_hoisted_2, _hoisted_3, _hoisted_4, _hoisted_5, _hoisted_6])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_7, _hoisted_8], 64
   /* STABLE_FRAGMENT */
   );
 }
@@ -18254,8 +18356,21 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "navbar"
 };
+var _hoisted_2 = {
+  "class": "architects"
+};
+var _hoisted_3 = {
+  "class": "projects"
+};
+
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", {
+  "class": "user"
+}, " USER PANEL ", -1
+/* HOISTED */
+);
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     onClick: _cache[1] || (_cache[1] = function () {
       return $options.createArchitect && $options.createArchitect.apply($options, arguments);
     })
@@ -18263,7 +18378,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[2] || (_cache[2] = function () {
       return $options.architectList && $options.architectList.apply($options, arguments);
     })
-  }, "Architects"), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
+  }, "Architects")]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("div", _hoisted_3, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)("button", {
     onClick: _cache[3] || (_cache[3] = function () {
       return $options.createProject && $options.createProject.apply($options, arguments);
     })
@@ -18271,7 +18386,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[4] || (_cache[4] = function () {
       return $options.projecList && $options.projecList.apply($options, arguments);
     })
-  }, "Projects")]);
+  }, "Projects")]), _hoisted_4]);
 }
 
 /***/ }),
@@ -18518,6 +18633,27 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
     AppComponent: _components_AppComponent_vue__WEBPACK_IMPORTED_MODULE_1__.default
   }
 }).mount('#app');
+
+function animateBackToTop() {
+  var backToTop = document.querySelector('.backToTop > a');
+  addEventListener('wheel', function (event) {
+    if (window.scrollY < window.innerHeight / 6) {
+      backToTop.classList.add('hidden');
+    } else {
+      if (event.deltaY > 0) {
+        backToTop.classList.add('hidden');
+      }
+
+      if (event.deltaY < 0) {
+        backToTop.classList.remove('hidden');
+      }
+    }
+
+    return;
+  });
+}
+
+animateBackToTop();
 
 /***/ }),
 

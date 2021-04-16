@@ -33,7 +33,15 @@ export default {
                 if(res.data.error) {
                     this.error = res.data.error ?? '';
                 } else {
-                    console.log(res.data);
+                    const messege = `Architect <span>${res.data.deletedArchitect.name} ${res.data.deletedArchitect.surname}</span> has been removed successfully`;
+                    const contDOM = document.querySelector('#toast');
+                    const textDOM = document.querySelector('#toast > p');
+                    contDOM.classList.remove('hidden');
+                    textDOM.innerHTML = messege;
+                    setTimeout(() => {
+                        contDOM.classList.add('hidden');
+                        textDOM.innerHTML = '';
+                    }, 3500);
                     this.error = '';
                     this.$parent.$parent.architects = res.data.architects;
                     this.cancelDelete(id.replace('deleteConfirm', ''));
